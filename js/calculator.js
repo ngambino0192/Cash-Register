@@ -62,7 +62,7 @@ calculatorModule = (function(){
 
 
     var numList = document.getElementsByClassName('mini-btns');
-
+    
     var numListOne = numList[0];
     numListOne.addEventListener('click', appendNum1);
 
@@ -72,8 +72,10 @@ calculatorModule = (function(){
             screenNumber.innerHTML = numListOne.innerHTML;
         } else if (operator === null){
             screenNumber.innerHTML += numListOne.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
+            screenNumber.innerHTML += numListOne.innerHTML;
         } else{
-            screenNumber.innerHTML = numListOne.innerHTML;
+            screenNumber.innerHTML = numListOne.innerHTML; 
         }
     }
 
@@ -87,6 +89,8 @@ calculatorModule = (function(){
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListTwo.innerHTML;
         } else if (operator === null){
+            screenNumber.innerHTML += numListTwo.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
             screenNumber.innerHTML += numListTwo.innerHTML;
         } else{
             screenNumber.innerHTML = numListTwo.innerHTML;
@@ -102,6 +106,8 @@ calculatorModule = (function(){
             screenNumber.innerHTML = numListThree.innerHTML;
         } else if (operator === null){
             screenNumber.innerHTML += numListThree.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
+            screenNumber.innerHTML += numListThree.innerHTML;
         } else{
             screenNumber.innerHTML = numListThree.innerHTML;
         }
@@ -115,6 +121,8 @@ calculatorModule = (function(){
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListFour.innerHTML;
         } else if (operator === null){
+            screenNumber.innerHTML += numListFour.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
             screenNumber.innerHTML += numListFour.innerHTML;
         } else{
             screenNumber.innerHTML = numListFour.innerHTML;
@@ -130,6 +138,8 @@ calculatorModule = (function(){
             screenNumber.innerHTML = numListFive.innerHTML;
         } else if (operator === null){
             screenNumber.innerHTML += numListFive.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
+            screenNumber.innerHTML += numListFive.innerHTML;
         } else{
             screenNumber.innerHTML = numListFive.innerHTML;
         }
@@ -143,6 +153,8 @@ calculatorModule = (function(){
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListSix.innerHTML;
         } else if (operator === null){
+            screenNumber.innerHTML += numListSix.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
             screenNumber.innerHTML += numListSix.innerHTML;
         } else{
             screenNumber.innerHTML = numListSix.innerHTML;
@@ -158,6 +170,8 @@ calculatorModule = (function(){
             screenNumber.innerHTML = numListSeven.innerHTML;
         } else if (operator === null){
             screenNumber.innerHTML += numListSeven.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
+            screenNumber.innerHTML += numListSeven.innerHTML;
         } else{
             screenNumber.innerHTML = numListSeven.innerHTML;
         }
@@ -172,6 +186,8 @@ calculatorModule = (function(){
             screenNumber.innerHTML = numListEight.innerHTML;
         } else if (operator === null){
             screenNumber.innerHTML += numListEight.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
+            screenNumber.innerHTML += numListEight.innerHTML;
         } else{
             screenNumber.innerHTML = numListEight.innerHTML;
         }
@@ -185,6 +201,8 @@ calculatorModule = (function(){
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListNine.innerHTML;
         } else if (operator === null){
+            screenNumber.innerHTML += numListNine.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
             screenNumber.innerHTML += numListNine.innerHTML;
         } else{
             screenNumber.innerHTML = numListNine.innerHTML;
@@ -201,6 +219,8 @@ calculatorModule = (function(){
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListZero.innerHTML;
         } else if (operator === null){
+            screenNumber.innerHTML += numListZero.innerHTML;
+        } else if (screenNumber.innerHTML != memory){
             screenNumber.innerHTML += numListZero.innerHTML;
         } else{
             screenNumber.innerHTML = numListZero.innerHTML;
