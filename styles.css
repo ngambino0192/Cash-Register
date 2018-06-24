@@ -67,7 +67,7 @@ body {
     /* display: none; */
 }
 
-.mini-btns {
+.num-btns {
     flex: 1 1 15%; 
     margin: -2px -2px 0 0;
     padding: 10px;
@@ -82,7 +82,7 @@ body {
 
 }
 
-.mini-btns-op {
+.op-btns {
     flex: 1 1 15%; 
     margin: -2px -2px 0 0;
     padding: 10px;
