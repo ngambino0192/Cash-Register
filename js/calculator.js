@@ -10,6 +10,7 @@ calculatorModule = (function(){
     var total = 0;
 
     var equationArr = [];
+    console.log(equationArr);
 
 
 
@@ -18,7 +19,7 @@ calculatorModule = (function(){
     off.addEventListener('click', offScreen);
 
     function offScreen(){
-        console.log('off-btn working');
+        // console.log('off-btn working');
         document.getElementById('screen').innerHTML = 'off';
     }
 
@@ -29,7 +30,7 @@ calculatorModule = (function(){
     on.addEventListener('click', onScreen);
 
     function onScreen(){
-        console.log('on-btn working');
+        // console.log('on-btn working');
         document.getElementById('screen').innerHTML = 'on';
     }
 
@@ -46,7 +47,7 @@ calculatorModule = (function(){
         // console.log(memory);
         // console.log(operator);
         equationArr.push(memory, operator);
-        console.log(equationArr);
+        // console.log(equationArr);
 
     }
 
@@ -60,10 +61,10 @@ calculatorModule = (function(){
         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
         memory = parseInt(screenNumber.innerHTML);
         operator = '-';
-        console.log(memory);
-        console.log(operator);
+        // console.log(memory);
+        // console.log(operator);
         equationArr.push(memory, operator);
-        console.log(equationArr);
+        // console.log(equationArr);
     }
 
 
@@ -76,10 +77,10 @@ calculatorModule = (function(){
         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
         memory = parseInt(screenNumber.innerHTML);
         operator = '*';
-        console.log(memory);
-        console.log(operator);
+        // console.log(memory);
+        // console.log(operator);
         equationArr.push(memory, operator);
-        console.log(equationArr);
+        // console.log(equationArr);
     }
 
 
@@ -92,26 +93,24 @@ calculatorModule = (function(){
         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
         memory = parseInt(screenNumber.innerHTML);
         operator = '/';
-        console.log(memory);
-        console.log(operator);
+        // console.log(memory);
+        // console.log(operator);
         equationArr.push(memory, operator);
-        console.log(equationArr);
+        // console.log(equationArr);
     }
 
     
     
     // execute equation
     var equals = document.getElementById('equalsBtn');
-    equals.addEventListener('click', execute);
+    equals.addEventListener('click', finalizeEquation);
 
-    function execute(){
+    function finalizeEquation(){
         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
         memory = parseInt(screenNumber.innerHTML);
-        console.log(memory);
+        // console.log(memory);
         equationArr.push(memory);
-        console.log(equationArr);
-        
-
+        // console.log(equationArr);
     }
 
 
@@ -122,7 +121,7 @@ calculatorModule = (function(){
     numListOne.addEventListener('click', appendNum1);
 
     function appendNum1(){
-        console.log(typeof screenNumber.innerHTML);
+        // console.log(typeof screenNumber.innerHTML);
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListOne.innerHTML;
         } else if (operator === null){
@@ -140,7 +139,7 @@ calculatorModule = (function(){
     numListTwo.addEventListener('click', appendNum2);
 
     function appendNum2(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListTwo.innerHTML;
         } else if (operator === null){
@@ -156,7 +155,7 @@ calculatorModule = (function(){
     numListThree.addEventListener('click', appendNum3);
 
     function appendNum3(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListThree.innerHTML;
         } else if (operator === null){
@@ -172,7 +171,7 @@ calculatorModule = (function(){
     numListFour.addEventListener('click', appendNum4);
 
     function appendNum4(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListFour.innerHTML;
         } else if (operator === null){
@@ -188,7 +187,7 @@ calculatorModule = (function(){
     numListFive.addEventListener('click', appendNum5);
 
     function appendNum5(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListFive.innerHTML;
         } else if (operator === null){
@@ -204,7 +203,7 @@ calculatorModule = (function(){
     numListSix.addEventListener('click', appendNum6);
 
     function appendNum6(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListSix.innerHTML;
         } else if (operator === null){
@@ -220,7 +219,7 @@ calculatorModule = (function(){
     numListSeven.addEventListener('click', appendNum7);
 
     function appendNum7(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListSeven.innerHTML;
         } else if (operator === null){
@@ -236,7 +235,7 @@ calculatorModule = (function(){
     numListEight.addEventListener('click', appendNum8);
 
     function appendNum8(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListEight.innerHTML;
         } else if (operator === null){
@@ -252,7 +251,7 @@ calculatorModule = (function(){
     numListNine.addEventListener('click', appendNum9);
 
     function appendNum9(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListNine.innerHTML;
         } else if (operator === null){
@@ -268,8 +267,8 @@ calculatorModule = (function(){
     numListZero.addEventListener('click', appendNum0);
 
     function appendNum0(){
-        console.log('appendNum working');
-        console.log(numListZero.innerHTML);
+        // console.log('appendNum working');
+        // console.log(numListZero.innerHTML);
         // screenNumber.innerHTML += numListZero.innerHTML;
         if (screenNumber.innerHTML === '0' && operator === null){
             screenNumber.innerHTML = numListZero.innerHTML;
@@ -286,7 +285,7 @@ calculatorModule = (function(){
     numListDecimal.addEventListener('click', appendNumDec);
 
     function appendNumDec(){
-        console.log('appendNum working');
+        // console.log('appendNum working');
         screenNumber.innerHTML += numListDecimal.innerHTML
     }
 
@@ -297,7 +296,7 @@ calculatorModule = (function(){
     clear.addEventListener('click', clearScreen);
 
     function clearScreen(){
-        console.log('clearScreen working');
+        // console.log('clearScreen working');
         location.reload();
     }
 
