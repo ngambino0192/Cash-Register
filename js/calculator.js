@@ -3,6 +3,7 @@ var calculatorModule = (function(){
     // private variables
     
     var value1 = 0;
+    var memory = 0;
     var value2 = 0;
     var total = 0;
     var operator = null;
@@ -50,7 +51,9 @@ var calculatorModule = (function(){
     }
 
     function setOperator(z) {
-        operator = z;
+        operator = z; // set new operator
+        memory = value1; // set current value1 into memory
+        value1 = 0; // clear value1
         return operator;
     }
 
@@ -70,6 +73,11 @@ var calculatorModule = (function(){
 var display = document.getElementById('screen');
 display.innerHTML = 0;
 
+
+
+//** NUMBER EVENTS **//
+
+
 // target number buttons
 var targetNum = document.getElementsByClassName('num-btns');
 
@@ -81,15 +89,13 @@ var oneBtnValue = parseInt(oneBtn.innerHTML);
 
 function loadValue1(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = oneBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += oneBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += oneBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = oneBtnValue;
     } else{
-        display.innerHTMl = oneBtnValue;
-    }
+        display.innerHTML += oneBtnValue;
+    } 
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
@@ -102,14 +108,12 @@ var twoBtnValue = parseInt(twoBtn.innerHTML);
 
 function loadValue2(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = twoBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += twoBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += twoBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = twoBtnValue;
     } else{
-        display.innerHTMl = twoBtnValue;
+        display.innerHTML += twoBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -123,14 +127,12 @@ var threeBtnValue = parseInt(threeBtn.innerHTML);
 
 function loadValue3(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = threeBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += threeBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += threeBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = threeBtnValue;
     } else{
-        display.innerHTMl = threeBtnValue;
+        display.innerHTML += threeBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -144,14 +146,12 @@ var fourBtnValue = parseInt(fourBtn.innerHTML);
 
 function loadValue4(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = fourBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += fourBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += fourBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = fourBtnValue;
     } else{
-        display.innerHTMl = fourBtnValue;
+        display.innerHTML += fourBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -165,14 +165,12 @@ var fiveBtnValue = parseInt(fiveBtn.innerHTML);
 
 function loadValue5(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = fiveBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += fiveBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += fiveBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = fiveBtnValue;
     } else{
-        display.innerHTMl = fiveBtnValue;
+        display.innerHTML += fiveBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -186,14 +184,12 @@ var sixBtnValue = parseInt(sixBtn.innerHTML);
 
 function loadValue6(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = sixBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += sixBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += sixBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = sixBtnValue;
     } else{
-        display.innerHTMl = sixBtnValue;
+        display.innerHTML += sixBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -207,14 +203,12 @@ var sevenBtnValue = parseInt(sevenBtn.innerHTML);
 
 function loadValue7(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = sevenBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += sevenBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += sevenBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = sevenBtnValue;
     } else{
-        display.innerHTMl = sevenBtnValue;
+        display.innerHTML += sevenBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -228,14 +222,12 @@ var eightBtnValue = parseInt(eightBtn.innerHTML);
 
 function loadValue8(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = eightBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += eightBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += eightBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = eightBtnValue;
     } else{
-        display.innerHTMl = eightBtnValue;
+        display.innerHTML += eightBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -249,14 +241,12 @@ var nineBtnValue = parseInt(nineBtn.innerHTML);
 
 function loadValue9(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+    if (display.innerHTML === '0'){
         display.innerHTML = nineBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += nineBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += nineBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = nineBtnValue;
     } else{
-        display.innerHTMl = nineBtnValue;
+        display.innerHTML += nineBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -270,14 +260,12 @@ var zeroBtnValue = parseInt(zeroBtn.innerHTML);
 
 function loadValue0(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
-        display.innerHTML += zeroBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += zeroBtnValue;
-    } else if (display.innerHTML != value1){
-        display.innerHTML += zeroBtnValue;
+    if (display.innerHTML === '0'){
+        display.innerHTML = zeroBtnValue;
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = zeroBtnValue;
     } else{
-        display.innerHTMl += zeroBtnValue;
+        display.innerHTML += zeroBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
@@ -305,6 +293,48 @@ function loadValueDecm(){
 }
 
 
+
+//** OPERATOR EVENTS **//
+
+
+var opBtn = document.getElementsByClassName('op-btns');
+// console.log(opBtn);
+
+
+var addBtn = opBtn[0];
+addBtn.addEventListener('click', setAdd);
+var addBtnValue = addBtn.innerHTML;
+console.log(addBtnValue);
+
+function setAdd(){
+    display.innerHTML = addBtnValue;
+}
+
+// var oneBtn = targetNum[0];
+// oneBtn.addEventListener('click', loadValue1);
+// var oneBtnValue = parseInt(oneBtn.innerHTML);
+
+// function loadValue1(){
+
+//     if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
+//         display.innerHTML = oneBtnValue;
+//     } else if(calculatorModule.getOperator() === null){
+//         display.innerHTML += oneBtnValue;
+//     } else if (display.innerHTML != value1){
+//         display.innerHTML += oneBtnValue;
+//     } else{
+//         display.innerHTMl = oneBtnValue;
+//     }
+//     calculatorModule.setValue1(parseInt(display.innerHTML));
+//     console.log(calculatorModule.getValue1());
+// }
+
+
+
+
+
+
+
 var clearBtn = document.getElementById('clear-btn');
 clearBtn.addEventListener('click', clearScreen);
 
@@ -313,21 +343,6 @@ function clearScreen(){
     display.innerHTML = '0';
     console.log(calculatorModule.getValue1());
 }
-
-
-//     // clear register
-//     var clear = document.getElementById('clear-btn');
-//     clear.addEventListener('click', clearScreen);
-
-//     function clearScreen(){
-//         // console.log('clearScreen working');
-//         location.reload();
-//     }
-
-// }());
-
-// var display = document.getElementById('screen');
-// display.innerHTML = 0;
 
 
 
