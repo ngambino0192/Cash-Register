@@ -9,6 +9,8 @@ calculatorModule = (function(){
     var operator = null;
     var total = 0;
 
+    var equationArr = [];
+
 
 
     // turn off register
@@ -41,8 +43,10 @@ calculatorModule = (function(){
         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
         memory = parseInt(screenNumber.innerHTML);
         operator = '+';
-        console.log(memory);
-        console.log(operator);
+        // console.log(memory);
+        // console.log(operator);
+        equationArr.push(memory, operator);
+        console.log(equationArr);
 
     }
 
@@ -53,10 +57,45 @@ calculatorModule = (function(){
     sub.addEventListener('click', subtract);
 
     function subtract(){
-        // screenNumber.innerHTML--
-        memory = screenNumber.innerHTML;
-        console.log(screenNumber.innerHTML);
-        document.getElementById('screen').innerHTML = screenNumber.innerHTML;
+        document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
+        memory = parseInt(screenNumber.innerHTML);
+        operator = '-';
+        console.log(memory);
+        console.log(operator);
+        equationArr.push(memory, operator);
+        console.log(equationArr);
+    }
+
+
+
+    // multiply functionality
+    var mult = document.getElementById('multBtn');
+    mult.addEventListener('click', multiply);
+
+    function multiply(){
+        document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
+        memory = parseInt(screenNumber.innerHTML);
+        operator = '*';
+        console.log(memory);
+        console.log(operator);
+        equationArr.push(memory, operator);
+        console.log(equationArr);
+    }
+
+
+
+    // divide functionality
+    var divd = document.getElementById('divdBtn');
+    divd.addEventListener('click', divide);
+
+    function divide(){
+        document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
+        memory = parseInt(screenNumber.innerHTML);
+        operator = '/';
+        console.log(memory);
+        console.log(operator);
+        equationArr.push(memory, operator);
+        console.log(equationArr);
     }
 
 
