@@ -91,7 +91,7 @@ function loadValue1(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = oneBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = oneBtnValue;
     } else{
         display.innerHTML += oneBtnValue;
@@ -110,7 +110,7 @@ function loadValue2(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = twoBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = twoBtnValue;
     } else{
         display.innerHTML += twoBtnValue;
@@ -129,7 +129,7 @@ function loadValue3(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = threeBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = threeBtnValue;
     } else{
         display.innerHTML += threeBtnValue;
@@ -148,7 +148,7 @@ function loadValue4(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = fourBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = fourBtnValue;
     } else{
         display.innerHTML += fourBtnValue;
@@ -167,7 +167,7 @@ function loadValue5(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = fiveBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = fiveBtnValue;
     } else{
         display.innerHTML += fiveBtnValue;
@@ -186,7 +186,7 @@ function loadValue6(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = sixBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = sixBtnValue;
     } else{
         display.innerHTML += sixBtnValue;
@@ -205,7 +205,7 @@ function loadValue7(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = sevenBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = sevenBtnValue;
     } else{
         display.innerHTML += sevenBtnValue;
@@ -224,7 +224,7 @@ function loadValue8(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = eightBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = eightBtnValue;
     } else{
         display.innerHTML += eightBtnValue;
@@ -243,7 +243,7 @@ function loadValue9(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = nineBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = nineBtnValue;
     } else{
         display.innerHTML += nineBtnValue;
@@ -262,7 +262,7 @@ function loadValue0(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = zeroBtnValue;
-    } else if(display.innerHTML === '+'){
+    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
         display.innerHTML = zeroBtnValue;
     } else{
         display.innerHTML += zeroBtnValue;
