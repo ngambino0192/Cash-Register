@@ -91,7 +91,13 @@ function loadValue1(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = oneBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = oneBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = oneBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = oneBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = oneBtnValue;
     } else{
         display.innerHTML += oneBtnValue;
@@ -110,7 +116,13 @@ function loadValue2(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = twoBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = twoBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = twoBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = twoBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = twoBtnValue;
     } else{
         display.innerHTML += twoBtnValue;
@@ -129,7 +141,13 @@ function loadValue3(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = threeBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = threeBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = threeBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = threeBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = threeBtnValue;
     } else{
         display.innerHTML += threeBtnValue;
@@ -148,7 +166,13 @@ function loadValue4(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = fourBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = fourBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = fourBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = fourBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = fourBtnValue;
     } else{
         display.innerHTML += fourBtnValue;
@@ -167,7 +191,13 @@ function loadValue5(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = fiveBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = fiveBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = fiveBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = fiveBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = fiveBtnValue;
     } else{
         display.innerHTML += fiveBtnValue;
@@ -186,7 +216,13 @@ function loadValue6(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = sixBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = sixBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = sixBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = sixBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = sixBtnValue;
     } else{
         display.innerHTML += sixBtnValue;
@@ -205,7 +241,13 @@ function loadValue7(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = sevenBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = sevenBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = sevenBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = sevenBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = sevenBtnValue;
     } else{
         display.innerHTML += sevenBtnValue;
@@ -224,7 +266,13 @@ function loadValue8(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = eightBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = eightBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = eightBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = eightBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = eightBtnValue;
     } else{
         display.innerHTML += eightBtnValue;
@@ -243,7 +291,13 @@ function loadValue9(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = nineBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = nineBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = nineBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = nineBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = nineBtnValue;
     } else{
         display.innerHTML += nineBtnValue;
@@ -262,7 +316,13 @@ function loadValue0(){
 
     if (display.innerHTML === '0'){
         display.innerHTML = zeroBtnValue;
-    } else if(display.innerHTML === '+' && '-' && '*' && '/'){
+    } else if(display.innerHTML === '+'){
+        display.innerHTML = zeroBtnValue;
+    } else if(display.innerHTML === '-'){
+        display.innerHTML = zeroBtnValue;
+    } else if(display.innerHTML === '*'){
+        display.innerHTML = zeroBtnValue;
+    } else if(display.innerHTML === '/'){
         display.innerHTML = zeroBtnValue;
     } else{
         display.innerHTML += zeroBtnValue;
@@ -301,13 +361,50 @@ var opBtn = document.getElementsByClassName('op-btns');
 // console.log(opBtn);
 
 
+// add event for '+' operator
 var addBtn = opBtn[0];
 addBtn.addEventListener('click', setAdd);
 var addBtnValue = addBtn.innerHTML;
-console.log(addBtnValue);
+// console.log(addBtnValue);
 
 function setAdd(){
     display.innerHTML = addBtnValue;
+}
+
+
+// add event for '-' operator
+var subtBtn = opBtn[1];
+subtBtn.addEventListener('click', setSubt);
+var subtBtnValue = subtBtn.innerHTML;
+// console.log(subtBtnValue);
+
+function setSubt(){
+    display.innerHTML = subtBtnValue;
+    console.log(subtBtnValue);
+}
+
+
+// add event for '*' operator
+var multBtn = opBtn[2];
+multBtn.addEventListener('click', setMult);
+var multBtnValue = multBtn.innerHTML;
+// console.log(subtBtnValue);
+
+function setMult(){
+    display.innerHTML = multBtnValue;
+    console.log(multBtnValue);
+}
+
+
+// add event for '/' operator
+var divdBtn = opBtn[4];
+divdBtn.addEventListener('click', setDivd);
+var divdBtnValue = divdBtn.innerHTML;
+// console.log(subtBtnValue);
+
+function setDivd(){
+    display.innerHTML = divdBtnValue;
+    console.log(divdBtnValue);
 }
 
 // var oneBtn = targetNum[0];
