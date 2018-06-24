@@ -98,6 +98,22 @@ calculatorModule = (function(){
         console.log(equationArr);
     }
 
+    
+    
+    // execute equation
+    var equals = document.getElementById('equalsBtn');
+    equals.addEventListener('click', execute);
+
+    function execute(){
+        document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
+        memory = parseInt(screenNumber.innerHTML);
+        console.log(memory);
+        equationArr.push(memory);
+        console.log(equationArr);
+        
+
+    }
+
 
 
     var numList = document.getElementsByClassName('mini-btns');
