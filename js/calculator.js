@@ -8,6 +8,9 @@ var calculatorModule = (function(){
     var operator = null;
 
     var equationArr = [];
+    var valueStack = [];
+
+    var finalResult = null;
 
     // getters
     
@@ -19,19 +22,92 @@ var calculatorModule = (function(){
         return memory;
     }
 
-    function getValue2() {
-        return num2;
-    }
-
     function getOperator() {
         return operator;
     }
 
-    function getEquationArr(){
+    function getEquationArr() {
         return equationArr;
     }
 
+    function parseEquationArr() {
+        var operatorStack = [];
+        var valueStack = [];
+        var isOperPushReady = false;
+
+        var finalStack = [];
+
+        // tokenize operators
+        var precedence = {
+            '*': 2,
+            '/': 2,
+            '+': 1,
+            '-': 1
+        }
+
+        // convert to reverse polish notation
+        equationArr.forEach(function(element){
+            if (typeof element === 'number') { // this is a number
+                valueStack.push(element);
+                if(isOperPushReady){ // ?
+                    valueStack = valueStack.concat(operatorStack.reverse());
+                    operatorStack = [];
+                    isOperPushReady = false;
+                  }
+            } else{ // this is an operator
+                operatorStack.push(element);
+                if (operatorStack.length !== 1 && (precedence[element] > precedence[operatorStack.slice(-1)[0]])){
+                    isOperPushReady = true;
+                }
+            }
+            
+        });
+        rpmValueStack = valueStack.concat(operatorStack);
+        // console.log(rpmValueStack);
+        // return rpmValueStack;
+        // return valueStack;
+
+        while (rpmValueStack.length){
+            // console.log(rpmValueStack);
+            var token = rpmValueStack.shift();
+
+            if (typeof token === 'number'){
+                finalStack.push(parseFloat(token));
+                continue;
+            }
+            var num2 = finalStack.pop();
+            var num1 = finalStack.pop();
+
+            switch(token) {
+                case '+':
+                    finalStack.push(num1 + num2);
+                    break;
+                case '-':
+                    finalStack.push(num1 - num2);
+                    break;
+                case '*':
+                    finalStack.push(num1 * num2);
+                    break;
+                case '/':
+                    finalStack.push(num1 / num2);
+                    break;
+            }
+            // console.log(finalStack.pop());
+            finalResult = finalStack.pop();
+            return finalStack.pop();
+        }
+    }
+
+    function getFinalResult(){
+        console.log(finalResult);
+        return finalResult;
+    }
+
+    // console.log(finalvalueStack);
+
+
     function execute() {
+        // console.log(valueStack);
         switch (operator){
             case '+':
                 total = value1 + memory;
@@ -47,7 +123,9 @@ var calculatorModule = (function(){
                 break;
         }
         return total;
+        // console.log(valueStack);
     }
+
 
     // setters
 
@@ -67,9 +145,9 @@ var calculatorModule = (function(){
 
     function setEquationArr(num, op) {
         if (op !== '='){
-            equationArr.push(num.toString(), op);
+            equationArr.push(num, op);
         }else{
-            equationArr.push(num.toString());
+            equationArr.push(num);
         }
         
     }
@@ -79,11 +157,13 @@ var calculatorModule = (function(){
         getValue1: getValue1,
         setMemory: setMemory,
         getMemory: getMemory,
-        execute: execute,
         setOperator: setOperator,
         getOperator: getOperator,
         setEquationArr: setEquationArr,
-        getEquationArr: getEquationArr
+        getEquationArr: getEquationArr,
+        parseEquationArr: parseEquationArr,
+        execute: execute,
+        getFinalResult: getFinalResult
     }
 
 }());
@@ -443,20 +523,12 @@ equalBtn.addEventListener('click', evaluate);
 var equalBtnValue = equalBtn.innerHTML;
 
 function evaluate(){
-    // single equation
-    // calculatorModule.getMemory();
-    // calculatorModule.getOperator();
-    // calculatorModule.getValue1();
-    // calculatorModule.execute();
-    // display.innerHTML = calculatorModule.execute();
-    // calculatorModule.setMemory(calculatorModule.execute());
-    // console.log(calculatorModule.getMemory());
-    // calculatorModule.setValue1(calculatorModule.getMemory());
-
     // equation array
-    calculatorModule.setOperator('=');
+    // calculatorModule.setOperator('=');
     calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
-    console.log(calculatorModule.getEquationArr());
+    calculatorModule.getEquationArr();
+    calculatorModule.parseEquationArr();
+    display.innerHTML = calculatorModule.getFinalResult();
 }
 
 
