@@ -376,7 +376,9 @@ var addBtnValue = addBtn.innerHTML;
 
 function setAdd(){
     display.innerHTML = addBtnValue;
+    console.log(display.innerHTML);
     calculatorModule.getValue1();
+    console.log(calculatorModule.getValue1());
     calculatorModule.setMemory(calculatorModule.getValue1());
     calculatorModule.setOperator('+');
 }
@@ -430,6 +432,9 @@ function evaluate(){
     calculatorModule.getValue1();
     calculatorModule.execute();
     display.innerHTML = calculatorModule.execute();
+    calculatorModule.setMemory(calculatorModule.execute());
+    console.log(calculatorModule.getMemory());
+    calculatorModule.setValue1(calculatorModule.getMemory());
 }
 
 
