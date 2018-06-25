@@ -4,9 +4,10 @@ var calculatorModule = (function(){
     
     var value1 = 0;
     var memory = 0;
-    var value2 = 0;
     var total = 0;
     var operator = null;
+
+    var equationArr = [];
 
     // getters
     
@@ -24,6 +25,10 @@ var calculatorModule = (function(){
 
     function getOperator() {
         return operator;
+    }
+
+    function getEquationArr(){
+        return equationArr;
     }
 
     function execute() {
@@ -54,16 +59,19 @@ var calculatorModule = (function(){
         memory = x;
     }
 
-    function setValue2(y) {
-        num2 = y;
+    function setOperator(x) {
+        operator = x; // set new operator
+        // memory = value1; // set current value1 into memory
+        return operator;
     }
 
-    function setOperator(z) {
-        operator = z; // set new operator
-        memory = value1; // set current value1 into memory
-        // console.log(memory);
-        value1 = 0; // clear value1
-        return operator;
+    function setEquationArr(num, op) {
+        if (op !== '='){
+            equationArr.push(num.toString(), op);
+        }else{
+            equationArr.push(num.toString());
+        }
+        
     }
 
     return {
@@ -71,11 +79,11 @@ var calculatorModule = (function(){
         getValue1: getValue1,
         setMemory: setMemory,
         getMemory: getMemory,
-        setValue2: setValue2,
-        getValue2: getValue2,
         execute: execute,
         setOperator: setOperator,
-        getOperator: getOperator
+        getOperator: getOperator,
+        setEquationArr: setEquationArr,
+        getEquationArr: getEquationArr
     }
 
 }());
@@ -375,12 +383,14 @@ addBtn.addEventListener('click', setAdd);
 var addBtnValue = addBtn.innerHTML;
 
 function setAdd(){
-    display.innerHTML = addBtnValue;
-    console.log(display.innerHTML);
-    calculatorModule.getValue1();
-    console.log(calculatorModule.getValue1());
+    display.innerHTML = addBtnValue; // make screen display '+'
+    // console.log(display.innerHTML);
+    calculatorModule.getValue1(); // get what is stored in value1
+    // console.log(calculatorModule.getValue1());
     calculatorModule.setMemory(calculatorModule.getValue1());
     calculatorModule.setOperator('+');
+    calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
+    console.log(calculatorModule.getEquationArr());
 }
 
 
@@ -394,6 +404,8 @@ function setSubt(){
     calculatorModule.getValue1();
     calculatorModule.setMemory(calculatorModule.getValue1());
     calculatorModule.setOperator('-');
+    calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
+    console.log(calculatorModule.getEquationArr());
 }
 
 
@@ -407,6 +419,8 @@ function setMult(){
     calculatorModule.getValue1();
     calculatorModule.setMemory(calculatorModule.getValue1());
     calculatorModule.setOperator('*');
+    calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
+    console.log(calculatorModule.getEquationArr());
 }
 
 
@@ -420,6 +434,8 @@ function setDivd(){
     calculatorModule.getValue1();
     calculatorModule.setMemory(calculatorModule.getValue1());
     calculatorModule.setOperator('/');
+    calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
+    console.log(calculatorModule.getEquationArr());
 }
 
 var equalBtn = opBtn[3];
@@ -427,14 +443,20 @@ equalBtn.addEventListener('click', evaluate);
 var equalBtnValue = equalBtn.innerHTML;
 
 function evaluate(){
-    calculatorModule.getMemory();
-    calculatorModule.getOperator();
-    calculatorModule.getValue1();
-    calculatorModule.execute();
-    display.innerHTML = calculatorModule.execute();
-    calculatorModule.setMemory(calculatorModule.execute());
-    console.log(calculatorModule.getMemory());
-    calculatorModule.setValue1(calculatorModule.getMemory());
+    // single equation
+    // calculatorModule.getMemory();
+    // calculatorModule.getOperator();
+    // calculatorModule.getValue1();
+    // calculatorModule.execute();
+    // display.innerHTML = calculatorModule.execute();
+    // calculatorModule.setMemory(calculatorModule.execute());
+    // console.log(calculatorModule.getMemory());
+    // calculatorModule.setValue1(calculatorModule.getMemory());
+
+    // equation array
+    calculatorModule.setOperator('=');
+    calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
+    console.log(calculatorModule.getEquationArr());
 }
 
 
@@ -448,134 +470,3 @@ clearBtn.addEventListener('click', clearScreen);
 function clearScreen(){
     display.innerHTML = '0';
 }
-
-
-
-
-
-
-
-
-
-
-
-//     // add functionality    
-//     var add = document.getElementById('addBtn');
-//     add.addEventListener('click', addition);
-
-//     function addition(){
-//         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
-//         memory = parseInt(screenNumber.innerHTML);
-//         operator = '+';
-//         // console.log(memory);
-//         // console.log(operator);
-//         equationArr.push(memory, operator);
-//         // console.log(equationArr);
-
-//     }
-
-
-
-//     // subtract functionality
-//     var sub = document.getElementById('subBtn');
-//     sub.addEventListener('click', subtract);
-
-//     function subtract(){
-//         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
-//         memory = parseInt(screenNumber.innerHTML);
-//         operator = '-';
-//         // console.log(memory);
-//         // console.log(operator);
-//         equationArr.push(memory, operator);
-//         // console.log(equationArr);
-//     }
-
-
-
-//     // multiply functionality
-//     var mult = document.getElementById('multBtn');
-//     mult.addEventListener('click', multiply);
-
-//     function multiply(){
-//         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
-//         memory = parseInt(screenNumber.innerHTML);
-//         operator = '*';
-//         // console.log(memory);
-//         // console.log(operator);
-//         equationArr.push(memory, operator);
-//         // console.log(equationArr);
-//     }
-
-
-
-//     // divide functionality
-//     var divd = document.getElementById('divdBtn');
-//     divd.addEventListener('click', divide);
-
-//     function divide(){
-//         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
-//         memory = parseInt(screenNumber.innerHTML);
-//         operator = '/';
-//         // console.log(memory);
-//         // console.log(operator);
-//         equationArr.push(memory, operator);
-//         // console.log(equationArr);
-//     }
-
-    
-    
-//     // execute equation
-//     var equals = document.getElementById('equalsBtn');
-//     equals.addEventListener('click', finalizeEquation);
-
-//     function finalizeEquation(){
-//         document.getElementById('screen').innerHTML = + screenNumber.innerHTML;
-//         memory = parseInt(screenNumber.innerHTML);
-//         // console.log(memory);
-//         equationArr.push(memory);
-//         // console.log(equationArr);
-//         screenNumber.innerHTML = equationArr.join('');
-//         var result = parseInt(equationArr.join(''));
-//         console.log(typeof result);
-//         return result;
-//     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // turn off register
-    // var off = document.getElementById('off-btn');
-    // off.addEventListener('click', offScreen);
-
-    // function offScreen(){
-    //     // console.log('off-btn working');
-    //     document.getElementById('screen').innerHTML = 'off';
-    // }
-
-
-
-    // turn on register
-    // var on = document.getElementById('on-btn');
-    // on.addEventListener('click', onScreen);
-
-    // function onScreen(){
-    //     // console.log('on-btn working');
-    //     document.getElementById('screen').innerHTML = 'on';
-    // }
