@@ -11,7 +11,11 @@ var calculatorModule = (function(){
     // getters
     
     function getValue1() {
-        return num1;
+        return value1;
+    }
+
+    function getMemory() {
+        return memory;
     }
 
     function getValue2() {
@@ -25,16 +29,16 @@ var calculatorModule = (function(){
     function execute() {
         switch (operator){
             case '+':
-                total = num1 + num2;
+                total = value1 + memory;
                 break;
             case '-':
-                total = num1 - num2;
+                total = memory - value1;
                 break;
             case '*':
-                total = num1 * num2;
+                total = memory * value1;
                 break;
             case '/':
-                total = num1 / num2;
+                total = memory / value1;
                 break;
         }
         return total;
@@ -43,7 +47,11 @@ var calculatorModule = (function(){
     // setters
 
     function setValue1(x) {
-        num1 = x;
+        value1 = x;
+    }
+
+    function setMemory(x) {
+        memory = x;
     }
 
     function setValue2(y) {
@@ -53,6 +61,7 @@ var calculatorModule = (function(){
     function setOperator(z) {
         operator = z; // set new operator
         memory = value1; // set current value1 into memory
+        // console.log(memory);
         value1 = 0; // clear value1
         return operator;
     }
@@ -60,6 +69,8 @@ var calculatorModule = (function(){
     return {
         setValue1: setValue1,
         getValue1: getValue1,
+        setMemory: setMemory,
+        getMemory: getMemory,
         setValue2: setValue2,
         getValue2: getValue2,
         execute: execute,
@@ -72,8 +83,6 @@ var calculatorModule = (function(){
 // set display to 0
 var display = document.getElementById('screen');
 display.innerHTML = 0;
-
-
 
 //** NUMBER EVENTS **//
 
@@ -101,7 +110,7 @@ function loadValue1(){
         display.innerHTML = oneBtnValue;
     } else{
         display.innerHTML += oneBtnValue;
-    } 
+    }
     calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
@@ -358,17 +367,18 @@ function loadValueDecm(){
 
 
 var opBtn = document.getElementsByClassName('op-btns');
-// console.log(opBtn);
 
 
 // add event for '+' operator
 var addBtn = opBtn[0];
 addBtn.addEventListener('click', setAdd);
 var addBtnValue = addBtn.innerHTML;
-// console.log(addBtnValue);
 
 function setAdd(){
     display.innerHTML = addBtnValue;
+    calculatorModule.getValue1();
+    calculatorModule.setMemory(calculatorModule.getValue1());
+    calculatorModule.setOperator('+');
 }
 
 
@@ -376,11 +386,12 @@ function setAdd(){
 var subtBtn = opBtn[1];
 subtBtn.addEventListener('click', setSubt);
 var subtBtnValue = subtBtn.innerHTML;
-// console.log(subtBtnValue);
 
 function setSubt(){
     display.innerHTML = subtBtnValue;
-    console.log(subtBtnValue);
+    calculatorModule.getValue1();
+    calculatorModule.setMemory(calculatorModule.getValue1());
+    calculatorModule.setOperator('-');
 }
 
 
@@ -388,11 +399,12 @@ function setSubt(){
 var multBtn = opBtn[2];
 multBtn.addEventListener('click', setMult);
 var multBtnValue = multBtn.innerHTML;
-// console.log(subtBtnValue);
 
 function setMult(){
     display.innerHTML = multBtnValue;
-    console.log(multBtnValue);
+    calculatorModule.getValue1();
+    calculatorModule.setMemory(calculatorModule.getValue1());
+    calculatorModule.setOperator('*');
 }
 
 
@@ -400,45 +412,36 @@ function setMult(){
 var divdBtn = opBtn[4];
 divdBtn.addEventListener('click', setDivd);
 var divdBtnValue = divdBtn.innerHTML;
-// console.log(subtBtnValue);
 
 function setDivd(){
     display.innerHTML = divdBtnValue;
-    console.log(divdBtnValue);
+    calculatorModule.getValue1();
+    calculatorModule.setMemory(calculatorModule.getValue1());
+    calculatorModule.setOperator('/');
 }
 
-// var oneBtn = targetNum[0];
-// oneBtn.addEventListener('click', loadValue1);
-// var oneBtnValue = parseInt(oneBtn.innerHTML);
+var equalBtn = opBtn[3];
+equalBtn.addEventListener('click', evaluate);
+var equalBtnValue = equalBtn.innerHTML;
 
-// function loadValue1(){
-
-//     if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
-//         display.innerHTML = oneBtnValue;
-//     } else if(calculatorModule.getOperator() === null){
-//         display.innerHTML += oneBtnValue;
-//     } else if (display.innerHTML != value1){
-//         display.innerHTML += oneBtnValue;
-//     } else{
-//         display.innerHTMl = oneBtnValue;
-//     }
-//     calculatorModule.setValue1(parseInt(display.innerHTML));
-//     console.log(calculatorModule.getValue1());
-// }
+function evaluate(){
+    calculatorModule.getMemory();
+    calculatorModule.getOperator();
+    calculatorModule.getValue1();
+    calculatorModule.execute();
+    display.innerHTML = calculatorModule.execute();
+}
 
 
+//** MAIN BUTTONS **/
 
 
-
-
-
+// clear button
 var clearBtn = document.getElementById('clear-btn');
 clearBtn.addEventListener('click', clearScreen);
 
 function clearScreen(){
-    console.log('clear screen working');
     display.innerHTML = '0';
-    console.log(calculatorModule.getValue1());
 }
 
 
