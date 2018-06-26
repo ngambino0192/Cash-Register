@@ -2,7 +2,7 @@ var calculatorModule = (function(){
 
     // private variables
     
-    var value1 = 0;
+    var value = 0;
     var memory = 0;
     var total = 0;
     var operator = null;
@@ -10,12 +10,10 @@ var calculatorModule = (function(){
     var equationArr = [];
     var valueStack = [];
 
-    // var finalResult = null;
-
     // getters
     
     function getValue1() {
-        return value1;
+        return value;
     }
 
     function getMemory() {
@@ -29,6 +27,8 @@ var calculatorModule = (function(){
     function getEquationArr() {
         return equationArr;
     }
+
+    // parse equationArr, and convert to reverse polish notation: 2+3*4-3 => 234*+3-
 
     function parseEquationArr() {
         var operatorStack = [];
@@ -49,13 +49,12 @@ var calculatorModule = (function(){
         equationArr.forEach(function(element){
             if (typeof element === 'number') { // this is a number
                 valueStack.push(element);
-                console.log(valueStack);
-                if(isOperPushReady){ // ?
+                if(isOperPushReady){
                     valueStack = valueStack.concat(operatorStack.reverse());
                     operatorStack = [];
                     isOperPushReady = false;
                   }
-            } else{ // this is an operator
+            } else{ // this is an operator ** need to debug for '.'
                 operatorStack.push(element);
                 if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-2)[0]])){
                     isOperPushReady = true;
@@ -64,8 +63,7 @@ var calculatorModule = (function(){
         });
 
         valueStack = valueStack.concat(operatorStack);
-        // return valueStack;
-        // console.log(valueStack);
+        console.log(valueStack);
 
         var resultStack = [];
 
@@ -92,50 +90,19 @@ var calculatorModule = (function(){
             return resultStack.pop();
         }
 
+    // ** DEBUG ** //
 
-        // while (valueStack.length){
-        //     var token = valueStack.shift();
-
-        //     if (typeof token === 'number'){
-        //         finalStack.push(parseFloat(token));
-        //         continue;
-        //     }
-        //     var num2 = finalStack.pop();
-        //     var num1 = finalStack.pop();
-
-        //     switch(token) {
-        //         case '+':
-        //             finalStack.push(num1 + num2);
-        //             break;
-        //         case '-':
-        //             finalStack.push(num1 - num2);
-        //             break;
-        //         case '*':
-        //             finalStack.push(num1 * num2);
-        //             break;
-        //         case '/':
-        //             finalStack.push(num1 / num2);
-        //             break;
-        //     }
-        //     console.log(finalStack.pop());
-        //     finalResult = finalStack.pop();
-        //     return finalResult;
-        // }
-        // ** DEBUG ** //
     }
 
     function getFinalResult(x){
         finalResult = x;
-        // console.log(finalResult);
-        // display.innerHTML === finalResult;
         return finalResult;
     }
-
 
     // setters
 
     function setValue1(x) {
-        value1 = x;
+        value = x;
     }
 
     function setMemory(x) {
@@ -143,8 +110,7 @@ var calculatorModule = (function(){
     }
 
     function setOperator(x) {
-        operator = x; // set new operator
-        // memory = value1; // set current value1 into memory
+        operator = x;
         return operator;
     }
 
@@ -172,9 +138,11 @@ var calculatorModule = (function(){
 
 }());
 
-// set display to 0
+// start display at 0
 var display = document.getElementById('screen');
 display.innerHTML = 0;
+
+
 
 //** NUMBER EVENTS **//
 
@@ -183,7 +151,7 @@ display.innerHTML = 0;
 var targetNum = document.getElementsByClassName('num-btns');
 
 
-// append '1' into display and store in 'value1'
+// append '1' into display and store in 'value'
 var oneBtn = targetNum[0];
 oneBtn.addEventListener('click', loadValue1);
 var oneBtnValue = parseInt(oneBtn.innerHTML);
@@ -199,6 +167,8 @@ function loadValue1(){
     } else if(display.innerHTML === '*'){
         display.innerHTML = oneBtnValue;
     } else if(display.innerHTML === '/'){
+        display.innerHTML = oneBtnValue;
+    } else if(display.innerHTML === 'ON'){
         display.innerHTML = oneBtnValue;
     } else{
         display.innerHTML += oneBtnValue;
@@ -225,6 +195,8 @@ function loadValue2(){
         display.innerHTML = twoBtnValue;
     } else if(display.innerHTML === '/'){
         display.innerHTML = twoBtnValue;
+    } else if(display.innerHTML === 'ON'){
+        display.innerHTML = twoBtnValue;
     } else{
         display.innerHTML += twoBtnValue;
     }
@@ -249,6 +221,8 @@ function loadValue3(){
     } else if(display.innerHTML === '*'){
         display.innerHTML = threeBtnValue;
     } else if(display.innerHTML === '/'){
+        display.innerHTML = threeBtnValue;
+    } else if(display.innerHTML === 'ON'){
         display.innerHTML = threeBtnValue;
     } else{
         display.innerHTML += threeBtnValue;
@@ -275,6 +249,8 @@ function loadValue4(){
         display.innerHTML = fourBtnValue;
     } else if(display.innerHTML === '/'){
         display.innerHTML = fourBtnValue;
+    } else if(display.innerHTML === 'ON'){
+        display.innerHTML = fourBtnValue;
     } else{
         display.innerHTML += fourBtnValue;
     }
@@ -299,6 +275,8 @@ function loadValue5(){
     } else if(display.innerHTML === '*'){
         display.innerHTML = fiveBtnValue;
     } else if(display.innerHTML === '/'){
+        display.innerHTML = fiveBtnValue;
+    } else if(display.innerHTML === 'ON'){
         display.innerHTML = fiveBtnValue;
     } else{
         display.innerHTML += fiveBtnValue;
@@ -325,6 +303,8 @@ function loadValue6(){
         display.innerHTML = sixBtnValue;
     } else if(display.innerHTML === '/'){
         display.innerHTML = sixBtnValue;
+    } else if(display.innerHTML === 'ON'){
+        display.innerHTML = sixBtnValue;
     } else{
         display.innerHTML += sixBtnValue;
     }
@@ -349,6 +329,8 @@ function loadValue7(){
     } else if(display.innerHTML === '*'){
         display.innerHTML = sevenBtnValue;
     } else if(display.innerHTML === '/'){
+        display.innerHTML = sevenBtnValue;
+    } else if(display.innerHTML === 'ON'){
         display.innerHTML = sevenBtnValue;
     } else{
         display.innerHTML += sevenBtnValue;
@@ -375,6 +357,8 @@ function loadValue8(){
         display.innerHTML = eightBtnValue;
     } else if(display.innerHTML === '/'){
         display.innerHTML = eightBtnValue;
+    } else if(display.innerHTML === 'ON'){
+        display.innerHTML = eightBtnValue;
     } else{
         display.innerHTML += eightBtnValue;
     }
@@ -399,6 +383,8 @@ function loadValue9(){
     } else if(display.innerHTML === '*'){
         display.innerHTML = nineBtnValue;
     } else if(display.innerHTML === '/'){
+        display.innerHTML = nineBtnValue;
+    } else if(display.innerHTML === 'ON'){
         display.innerHTML = nineBtnValue;
     } else{
         display.innerHTML += nineBtnValue;
@@ -425,6 +411,8 @@ function loadValue0(){
         display.innerHTML = zeroBtnValue;
     } else if(display.innerHTML === '/'){
         display.innerHTML = zeroBtnValue;
+    } else if(display.innerHTML === 'ON'){
+        display.innerHTML = zeroBtnValue;
     } else{
         display.innerHTML += zeroBtnValue;
     }
@@ -444,7 +432,7 @@ function loadValueDecm(){
         display.innerHTML = decmBtnValue;
     } else if(calculatorModule.getOperator() === null){
         display.innerHTML += decmBtnValue;
-    } else if (display.innerHTML != value1){
+    } else if (display.innerHTML != value){
         display.innerHTML += decmBtnValue;
     } else{
         display.innerHTMl = decmBtnValue;
@@ -452,7 +440,6 @@ function loadValueDecm(){
     calculatorModule.setValue1(parseInt(display.innerHTML)); //**NEED TO DEBUG FOR DECIMAL PLACES**//
     console.log(calculatorModule.getValue1());
 }
-
 
 
 //** OPERATOR EVENTS **//
@@ -467,10 +454,8 @@ addBtn.addEventListener('click', setAdd);
 var addBtnValue = addBtn.innerHTML;
 
 function setAdd(){
-    display.innerHTML = addBtnValue; // make screen display '+'
-    // console.log(display.innerHTML);
-    calculatorModule.getValue1(); // get what is stored in value1
-    // console.log(calculatorModule.getValue1());
+    display.innerHTML = addBtnValue;
+    calculatorModule.getValue1();
     calculatorModule.setMemory(calculatorModule.getValue1());
     calculatorModule.setOperator('+');
     calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
@@ -522,20 +507,19 @@ function setDivd(){
     console.log(calculatorModule.getEquationArr());
 }
 
+
+// add event for '=' operator
 var equalBtn = opBtn[3];
 equalBtn.addEventListener('click', evaluate);
 var equalBtnValue = equalBtn.innerHTML;
 
 function evaluate(){
-    // equation array
     calculatorModule.setOperator('=');
     calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
     calculatorModule.getEquationArr();
     calculatorModule.parseEquationArr();
-    // console.log(calculatorModule.parseEquationArr());
-    // console.log(calculatorModule.getFinalResult());
     console.log(calculatorModule.getFinalResult(calculatorModule.parseEquationArr()));
-    // display.innerHTML = calculatorModule.getFinalResult();
+    display.innerHTML = calculatorModule.getFinalResult(calculatorModule.parseEquationArr());
 }
 
 
@@ -548,4 +532,24 @@ clearBtn.addEventListener('click', clearScreen);
 
 function clearScreen(){
     display.innerHTML = '0';
+    memory = 0;
+}
+
+var offBtn = document.getElementById('off-btn');
+offBtn.addEventListener('click', turnOff);
+
+function turnOff(){
+    display.innerHTML = 'OFF';
+    display.style.backgroundColor = 'black';
+    display.style.border = 'solid gray 2px'
+}
+
+var onBtn = document.getElementById('on-btn');
+onBtn.addEventListener('click', turnOn);
+
+function turnOn(){
+    display.innerHTML = 'ON';
+    display.style.backgroundColor = '#86DE95';
+    display.style.border = 'solid black 2px'
+
 }
