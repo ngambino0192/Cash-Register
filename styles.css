@@ -124,6 +124,10 @@ body {
     background-color: salmon;
 }
 
+.reg-btns:active {
+    background-color: cornflowerblue;
+}
+
 #screen:hover {
     background-color: greenyellow;
 }

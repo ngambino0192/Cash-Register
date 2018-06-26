@@ -514,14 +514,59 @@ equalBtn.addEventListener('click', evaluate);
 var equalBtnValue = equalBtn.innerHTML;
 
 function evaluate(){
+    // evaluate calculation, and show in display
     calculatorModule.setOperator('=');
     calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
     calculatorModule.getEquationArr();
     calculatorModule.parseEquationArr();
     console.log(calculatorModule.getFinalResult(calculatorModule.parseEquationArr()));
     display.innerHTML = calculatorModule.getFinalResult(calculatorModule.parseEquationArr());
+
 }
 
+//** REGISTER FUNCTIONS **//
+
+var checkBalanceBtn = false;
+
+// target reg-btns with DOM
+var regBtn = document.getElementsByClassName('reg-btns');
+
+
+// add event to 'check balance' button
+var checkBlc = regBtn[0];
+checkBlc.addEventListener('click', checkBalance);
+// var checkBalanceValue = checkBalanceBtn.innerHTML;
+
+function checkBalance(){
+    checkBalanceClick = true;
+    console.log('checkBalance');
+    display.innerHTML = localStorage.getItem('cashBalance.balance');
+};
+
+// add event to 'withdraw' button
+var withdrawBtn = regBtn[1];
+withdrawBtn.addEventListener('click', withdraw);
+
+function withdraw(){
+    console.log('withdraw');
+    display.innerHTML = 'TYPE AMOUNT'
+    localStorage.setItem('cashBalance.balance', cashBalance.balance - parseInt(display.innerHTML));
+
+};
+
+// add event to 'deposit' button
+var depositBtn = regBtn[2];
+depositBtn.addEventListener('click', deposit);
+
+function deposit(){
+    console.log('deposit');
+    var storedAmount = localStorage.getItem('cashBalance.balance');
+    localStorage.setItem('cashBalance.balance', parseInt(storedAmount) + parseInt(display.innerHTML));
+
+};
+
+
+// console.log(cashBalance.balance);
 
 //** MAIN BUTTONS **/
 
@@ -554,5 +599,3 @@ function turnOn(){
     // display.style.border = 'solid black 2px'
 
 }
-
-// console.log(cashBalance.balance);
