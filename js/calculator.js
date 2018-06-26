@@ -532,6 +532,7 @@ clearBtn.addEventListener('click', clearScreen);
 
 function clearScreen(){
     display.innerHTML = '0';
+    location.reload();
     memory = 0;
 }
 
@@ -540,8 +541,8 @@ offBtn.addEventListener('click', turnOff);
 
 function turnOff(){
     display.innerHTML = 'OFF';
-    display.style.backgroundColor = 'black';
-    display.style.border = 'solid gray 2px'
+    // display.style.backgroundColor = '#202020';
+    // display.style.border = 'solid gray 2px'
 }
 
 var onBtn = document.getElementById('on-btn');
@@ -549,7 +550,9 @@ onBtn.addEventListener('click', turnOn);
 
 function turnOn(){
     display.innerHTML = 'ON';
-    display.style.backgroundColor = '#86DE95';
-    display.style.border = 'solid black 2px'
+    // display.style.backgroundColor = '#86DE95';
+    // display.style.border = 'solid black 2px'
 
 }
+
+// console.log(cashBalance.balance);
