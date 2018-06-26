@@ -47,20 +47,37 @@ var calculatorModule = (function(){
 
         // convert to reverse polish notation
         equationArr.forEach(function(element){
-            if (typeof element === 'number') { // this is a number
+            if (typeof element === 'number') { // this is a number, push it to the value stack
                 valueStack.push(element);
                 if(isOperPushReady){
                     valueStack = valueStack.concat(operatorStack.reverse());
                     operatorStack = [];
                     isOperPushReady = false;
                   }
-            } else{ // this is an operator ** need to debug for '.'
-                operatorStack.push(element);
-                if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-2)[0]])){
+
+                // lines 58-62 solves case: 2+3*4-5 => 9
+                // } else{
+                // operatorStack.push(element);
+                // if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-2)[0]])){
+                //     isOperPushReady = true;
+                // }
+
+                // lines 66-69 solves for case: 8/4*2+3 => 7
+                } else {
+                    (operatorStack.length >= 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]]))
+                    operatorStack.push(element);
                     isOperPushReady = true;
                 }
-            }  
-        });
+            });
+            
+            // operatorStack.push(element);
+            // if (precedence[element] > precedence[operatorStack.slice(-1)[0]]){ // this is an operator ** need to debug for '.'
+            // operatorStack.push(element);
+            // isOperPushReady = false;
+            
+            
+            
+
 
         valueStack = valueStack.concat(operatorStack);
         console.log(valueStack);
