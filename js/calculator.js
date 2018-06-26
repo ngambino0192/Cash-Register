@@ -56,7 +56,7 @@ var calculatorModule = (function(){
                   }
             } else{ // this is an operator ** need to debug for '.'
                 operatorStack.push(element);
-                if (precedence[element] >= precedence[operatorStack.slice(-2)[0]]){
+                if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-2)[0]])){
                     isOperPushReady = true;
                 }
             }  
@@ -74,11 +74,11 @@ var calculatorModule = (function(){
                 var num1 = resultStack.pop();
                 var num2 = resultStack.pop();
                 console.log(num1);
-                console.log(num2);
+                console.log(num2)
                 if (valueStack[i] === '+') {
                     resultStack.push(num1 + num2);
                 } else if (valueStack[i] === '-'){
-                    resultStack.push(num1 - num2);
+                    resultStack.push(num2 - num1);
                 } else if (valueStack[i] === '*'){
                     resultStack.push(num1 * num2);
                 } else if (valueStack[i] === '/') {
