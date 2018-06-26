@@ -10,7 +10,7 @@ var calculatorModule = (function(){
     var equationArr = [];
     var valueStack = [];
 
-    var finalResult = null;
+    // var finalResult = null;
 
     // getters
     
@@ -49,6 +49,7 @@ var calculatorModule = (function(){
         equationArr.forEach(function(element){
             if (typeof element === 'number') { // this is a number
                 valueStack.push(element);
+                console.log(valueStack);
                 if(isOperPushReady){ // ?
                     valueStack = valueStack.concat(operatorStack.reverse());
                     operatorStack = [];
@@ -56,74 +57,78 @@ var calculatorModule = (function(){
                   }
             } else{ // this is an operator
                 operatorStack.push(element);
-                if (operatorStack.length !== 1 && (precedence[element] > precedence[operatorStack.slice(-1)[0]])){
+                if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-2)[0]])){
                     isOperPushReady = true;
                 }
-            }
-            
+            }  
         });
-        rpmValueStack = valueStack.concat(operatorStack);
-        // console.log(rpmValueStack);
-        // return rpmValueStack;
+
+        valueStack = valueStack.concat(operatorStack);
         // return valueStack;
+        // console.log(valueStack);
 
-        while (rpmValueStack.length){
-            // console.log(rpmValueStack);
-            var token = rpmValueStack.shift();
+        var resultStack = [];
 
-            if (typeof token === 'number'){
-                finalStack.push(parseFloat(token));
-                continue;
+        for (i=0; i<valueStack.length; i++){
+            if (typeof valueStack[i] === 'number'){
+                resultStack.push(valueStack[i]);
+            }else {
+                var num1 = resultStack.pop();
+                var num2 = resultStack.pop();
+                if (valueStack[i] === '+') {
+                    resultStack.push(num1 + num2);
+                } else if (valueStack[i] === '-'){
+                    resultStack.push(num1 - num2);
+                } else if (valueStack[i] === '*'){
+                    resultStack.push(num1 * num2);
+                } else if (valueStack[i] === '/') {
+                    resultStack.push(num1 / num2);
+                }
             }
-            var num2 = finalStack.pop();
-            var num1 = finalStack.pop();
-
-            switch(token) {
-                case '+':
-                    finalStack.push(num1 + num2);
-                    break;
-                case '-':
-                    finalStack.push(num1 - num2);
-                    break;
-                case '*':
-                    finalStack.push(num1 * num2);
-                    break;
-                case '/':
-                    finalStack.push(num1 / num2);
-                    break;
-            }
-            // console.log(finalStack.pop());
-            finalResult = finalStack.pop();
-            return finalStack.pop();
         }
+        if (resultStack.length > 1) {
+            return 'error';
+        } else {
+            return resultStack.pop();
+        }
+
+
+        // while (valueStack.length){
+        //     var token = valueStack.shift();
+
+        //     if (typeof token === 'number'){
+        //         finalStack.push(parseFloat(token));
+        //         continue;
+        //     }
+        //     var num2 = finalStack.pop();
+        //     var num1 = finalStack.pop();
+
+        //     switch(token) {
+        //         case '+':
+        //             finalStack.push(num1 + num2);
+        //             break;
+        //         case '-':
+        //             finalStack.push(num1 - num2);
+        //             break;
+        //         case '*':
+        //             finalStack.push(num1 * num2);
+        //             break;
+        //         case '/':
+        //             finalStack.push(num1 / num2);
+        //             break;
+        //     }
+        //     console.log(finalStack.pop());
+        //     finalResult = finalStack.pop();
+        //     return finalResult;
+        // }
+        // ** DEBUG ** //
     }
 
-    function getFinalResult(){
-        console.log(finalResult);
+    function getFinalResult(x){
+        finalResult = x;
+        // console.log(finalResult);
+        // display.innerHTML === finalResult;
         return finalResult;
-    }
-
-    // console.log(finalvalueStack);
-
-
-    function execute() {
-        // console.log(valueStack);
-        switch (operator){
-            case '+':
-                total = value1 + memory;
-                break;
-            case '-':
-                total = memory - value1;
-                break;
-            case '*':
-                total = memory * value1;
-                break;
-            case '/':
-                total = memory / value1;
-                break;
-        }
-        return total;
-        // console.log(valueStack);
     }
 
 
@@ -162,7 +167,6 @@ var calculatorModule = (function(){
         setEquationArr: setEquationArr,
         getEquationArr: getEquationArr,
         parseEquationArr: parseEquationArr,
-        execute: execute,
         getFinalResult: getFinalResult
     }
 
@@ -524,11 +528,14 @@ var equalBtnValue = equalBtn.innerHTML;
 
 function evaluate(){
     // equation array
-    // calculatorModule.setOperator('=');
+    calculatorModule.setOperator('=');
     calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
     calculatorModule.getEquationArr();
     calculatorModule.parseEquationArr();
-    display.innerHTML = calculatorModule.getFinalResult();
+    // console.log(calculatorModule.parseEquationArr());
+    // console.log(calculatorModule.getFinalResult());
+    console.log(calculatorModule.getFinalResult(calculatorModule.parseEquationArr()));
+    // display.innerHTML = calculatorModule.getFinalResult();
 }
 
 
