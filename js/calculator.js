@@ -54,35 +54,27 @@ var calculatorModule = (function(){
                     operatorStack = [];
                     isOperPushReady = false;
                   }
-
                 // lines 58-62 solves case: 2+3*4-5 => 9
-                // } else{
-                // operatorStack.push(element);
-                // if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-2)[0]])){
-                //     isOperPushReady = true;
-                // }
-
-                // lines 66-69 solves for case: 8/4*2+3 => 7
-                } else {
-                    (operatorStack.length >= 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]]))
-                    operatorStack.push(element);
+                } else{
+                operatorStack.push(element); // this is an operator, push it to the operator stack
+                if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]])){
                     isOperPushReady = true;
-                }
+                }}
+
+                // lines 65-69 solves for case: 8/4*2+3 => 7
+                // } else {
+                //     (operatorStack.length >= 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]]))
+                //     operatorStack.push(element);
+                //     isOperPushReady = false;
+                // }
             });
-            
-            // operatorStack.push(element);
-            // if (precedence[element] > precedence[operatorStack.slice(-1)[0]]){ // this is an operator ** need to debug for '.'
-            // operatorStack.push(element);
-            // isOperPushReady = false;
-            
-            
-            
 
-
+        // keep track of equation parsing
         valueStack = valueStack.concat(operatorStack);
         console.log(valueStack);
 
         var resultStack = [];
+        // console.log(resultStack);
 
         for (i=0; i<valueStack.length; i++){
             if (typeof valueStack[i] === 'number'){
@@ -90,8 +82,8 @@ var calculatorModule = (function(){
             }else {
                 var num1 = resultStack.pop();
                 var num2 = resultStack.pop();
-                console.log(num1);
-                console.log(num2)
+                console.log(num1); // keep track of numbers being computed
+                console.log(num2); // keep track of numbers being computed
                 if (valueStack[i] === '+') {
                     resultStack.push(num1 + num2);
                 } else if (valueStack[i] === '-'){
@@ -103,18 +95,45 @@ var calculatorModule = (function(){
                 }
             }
         }
+        // daisy chain expressions after '=' is clicked. not optimized for pemdas.
         if (resultStack.length > 1) {
-            return 'error';
+            // console.log(value);
+            // console.log(finalResult);
+            var newOperator = valueStack.find(function(element){
+                if (typeof element !== 'number'){
+                    return element;
+                }      
+            });
+            var newResult = finalResult;
+                switch (newOperator){
+                    case '+':
+                        total = newResult + (value/2);
+                        break;
+                    case '-':
+                        total = newResult - (value/2)
+                        break;
+                    case '*':
+                        total = memory * value;
+                        break;
+                    case '/':
+                        total = newResult / (value/2);
+                        break;
+                }
+                return total;
+            
+            // return newResult;
+            // return 'error'
+
         } else {
             return resultStack.pop();
+            console.log(resultStack.pop());
         }
-
-    // ** DEBUG ** //
-
     }
 
     function getFinalResult(x){
         finalResult = x;
+        memory = finalResult;
+        console.log(finalResult); // keep track of final result
         return finalResult;
     }
 
@@ -132,7 +151,7 @@ var calculatorModule = (function(){
         operator = x;
         return operator;
     }
-
+    
     function setEquationArr(num, op) {
         if (op !== '='){
             equationArr.push(num, op);
@@ -189,6 +208,10 @@ function loadValue1(){
         display.innerHTML = oneBtnValue;
     } else if(display.innerHTML === 'ON'){
         display.innerHTML = oneBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+        display.innerHTML = oneBtnValue;
     } else{
         display.innerHTML += oneBtnValue;
     }
@@ -215,6 +238,10 @@ function loadValue2(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = twoBtnValue;
     } else if(display.innerHTML === 'ON'){
+        display.innerHTML = twoBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
         display.innerHTML = twoBtnValue;
     } else{
         display.innerHTML += twoBtnValue;
@@ -243,6 +270,10 @@ function loadValue3(){
         display.innerHTML = threeBtnValue;
     } else if(display.innerHTML === 'ON'){
         display.innerHTML = threeBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+        display.innerHTML = threeBtnValue;
     } else{
         display.innerHTML += threeBtnValue;
     }
@@ -269,6 +300,10 @@ function loadValue4(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = fourBtnValue;
     } else if(display.innerHTML === 'ON'){
+        display.innerHTML = fourBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
         display.innerHTML = fourBtnValue;
     } else{
         display.innerHTML += fourBtnValue;
@@ -297,6 +332,10 @@ function loadValue5(){
         display.innerHTML = fiveBtnValue;
     } else if(display.innerHTML === 'ON'){
         display.innerHTML = fiveBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+        display.innerHTML = fiveBtnValue;
     } else{
         display.innerHTML += fiveBtnValue;
     }
@@ -323,6 +362,10 @@ function loadValue6(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = sixBtnValue;
     } else if(display.innerHTML === 'ON'){
+        display.innerHTML = sixBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
         display.innerHTML = sixBtnValue;
     } else{
         display.innerHTML += sixBtnValue;
@@ -351,6 +394,10 @@ function loadValue7(){
         display.innerHTML = sevenBtnValue;
     } else if(display.innerHTML === 'ON'){
         display.innerHTML = sevenBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+        display.innerHTML = sevenBtnValue;
     } else{
         display.innerHTML += sevenBtnValue;
     }
@@ -377,6 +424,10 @@ function loadValue8(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = eightBtnValue;
     } else if(display.innerHTML === 'ON'){
+        display.innerHTML = eightBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
         display.innerHTML = eightBtnValue;
     } else{
         display.innerHTML += eightBtnValue;
@@ -405,6 +456,10 @@ function loadValue9(){
         display.innerHTML = nineBtnValue;
     } else if(display.innerHTML === 'ON'){
         display.innerHTML = nineBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+        display.innerHTML = nineBtnValue;
     } else{
         display.innerHTML += nineBtnValue;
     }
@@ -431,6 +486,10 @@ function loadValue0(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = zeroBtnValue;
     } else if(display.innerHTML === 'ON'){
+        display.innerHTML = zeroBtnValue;
+    } else if(display.innerHTML === 'OFF'){
+        display.innerHTML = 'OFF';
+    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
         display.innerHTML = zeroBtnValue;
     } else{
         display.innerHTML += zeroBtnValue;
