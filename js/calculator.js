@@ -54,18 +54,18 @@ var calculatorModule = (function(){
                     operatorStack = [];
                     isOperPushReady = false;
                   }
-                // lines 58-62 solves case: 2+3*4-5 => 9
+                // *DEBUG* lines 58-62 solves case: 2+3*4-5 => 9
                 } else{
                 operatorStack.push(element); // this is an operator, push it to the operator stack
                 if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]])){
                     isOperPushReady = true;
                 }}
 
-                // lines 65-69 solves for case: 8/4*2+3 => 7
+                // *DEBUG* lines 65-69 solves for case: 8/4*2+3 => 7
                 // } else {
                 //     (operatorStack.length >= 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]]))
                 //     operatorStack.push(element);
-                //     isOperPushReady = false;
+                //     isOperPushReady = true;
                 // }
             });
 
@@ -74,8 +74,8 @@ var calculatorModule = (function(){
         console.log(valueStack);
 
         var resultStack = [];
-        // console.log(resultStack);
 
+        // evaluate polish notation
         for (i=0; i<valueStack.length; i++){
             if (typeof valueStack[i] === 'number'){
                 resultStack.push(valueStack[i]);
@@ -95,34 +95,31 @@ var calculatorModule = (function(){
                 }
             }
         }
-        // daisy chain expressions after '=' is clicked. not optimized for pemdas.
+
+        // daisy chain expressions after '=' is clicked. not optimized for pemdas, so only one expression. if another expression is passed through after the '=' is clicked, the resultStack will be > 1
         if (resultStack.length > 1) {
-            // console.log(value);
-            // console.log(finalResult);
             var newOperator = valueStack.find(function(element){
                 if (typeof element !== 'number'){
                     return element;
                 }      
             });
             var newResult = finalResult;
+            // *DEBUG* 'value' is evaluating to doulbe it's value
                 switch (newOperator){
                     case '+':
-                        total = newResult + (value/2);
+                        total = newResult + (value/2); // *HACK*
                         break;
                     case '-':
-                        total = newResult - (value/2)
+                        total = newResult - (value/2) // *HACK*
                         break;
                     case '*':
                         total = memory * value;
                         break;
                     case '/':
-                        total = newResult / (value/2);
+                        total = newResult / value;
                         break;
                 }
                 return total;
-            
-            // return newResult;
-            // return 'error'
 
         } else {
             return resultStack.pop();
@@ -141,6 +138,8 @@ var calculatorModule = (function(){
 
     function setValue1(x) {
         value = x;
+        // value = Math.abs(x);
+        return value;
     }
 
     function setMemory(x) {
@@ -506,14 +505,10 @@ var decmBtnValue = decmBtn.innerHTML;
 
 function loadValueDecm(){
 
-    if (display.innerHTML === '0' && calculatorModule.getOperator() === null){
-        display.innerHTML = decmBtnValue;
-    } else if(calculatorModule.getOperator() === null){
-        display.innerHTML += decmBtnValue;
-    } else if (display.innerHTML != value){
+    if (display.innerHTML === '0'){
         display.innerHTML += decmBtnValue;
     } else{
-        display.innerHTMl = decmBtnValue;
+        display.innerHTML += decmBtnValue;
     }
     calculatorModule.setValue1(parseInt(display.innerHTML)); //**NEED TO DEBUG FOR DECIMAL PLACES**//
     console.log(calculatorModule.getValue1());
