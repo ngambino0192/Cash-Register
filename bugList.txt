@@ -1,0 +1,17 @@
+Bug List:
+
+* parsing bug for operators with same precedence being passed through in sequential order (see calculator.js lines 49-70);
+
+* cannot daisy chain equations with pemdas dependency (replace switch statment to parsing algorithm once debugged)
+
+* decimal places are rounded down, and are not being fixed at decimal => toFixed() method?
+
+* withdraw not linked up properly
+
+* balance amount does not persist past refresh
+
+* condense event listeners for buttons. turn all event listeners for buttons into a single class
+
+* tweak css for responsiveness
+
+* negatives not supported

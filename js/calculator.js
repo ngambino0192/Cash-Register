@@ -123,7 +123,7 @@ var calculatorModule = (function(){
 
         } else {
             return resultStack.pop();
-            console.log(resultStack.pop());
+            // console.log(resultStack.pop());
         }
     }
 
@@ -608,7 +608,6 @@ var regBtn = document.getElementsByClassName('reg-btns');
 // add event to 'check balance' button
 var checkBlc = regBtn[0];
 checkBlc.addEventListener('click', checkBalance);
-// var checkBalanceValue = checkBalanceBtn.innerHTML;
 
 function checkBalance(){
     checkBalanceClick = true;
@@ -622,7 +621,7 @@ withdrawBtn.addEventListener('click', withdraw);
 
 function withdraw(){
     console.log('withdraw');
-    display.innerHTML = 'TYPE AMOUNT'
+    display.innerHTML = 'MY PRECIOUS';
     localStorage.setItem('cashBalance.balance', cashBalance.balance - parseInt(display.innerHTML));
 
 };
@@ -639,9 +638,7 @@ function deposit(){
 };
 
 
-// console.log(cashBalance.balance);
-
-//** MAIN BUTTONS **/
+//** TOP BUTTONS **/
 
 
 // clear button
@@ -659,8 +656,6 @@ offBtn.addEventListener('click', turnOff);
 
 function turnOff(){
     display.innerHTML = 'OFF';
-    // display.style.backgroundColor = '#202020';
-    // display.style.border = 'solid gray 2px'
 }
 
 var onBtn = document.getElementById('on-btn');
@@ -668,7 +663,4 @@ onBtn.addEventListener('click', turnOn);
 
 function turnOn(){
     display.innerHTML = 'ON';
-    // display.style.backgroundColor = '#86DE95';
-    // display.style.border = 'solid black 2px'
-
 }
