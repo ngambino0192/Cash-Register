@@ -8,7 +8,6 @@ var calculatorModule = (function(){
     var operator = null;
 
     var equationArr = [];
-    var valueStack = [];
 
     // getters
     
@@ -28,117 +27,78 @@ var calculatorModule = (function(){
         return equationArr;
     }
 
-    // parse equationArr, and convert to reverse polish notation: 2+3*4-3 => 234*+3-
-
     function parseEquationArr() {
-        var operatorStack = [];
-        var valueStack = [];
-        var isOperPushReady = false;
-
-        var finalStack = [];
-
-        // tokenize operators
-        var precedence = {
-            '*': 2,
-            '/': 2,
-            '+': 1,
-            '-': 1
-        }
-
-        // convert to reverse polish notation
-        equationArr.forEach(function(element){
-            if (typeof element === 'number') { // this is a number, push it to the value stack
-                valueStack.push(element);
-                if(isOperPushReady){
-                    valueStack = valueStack.concat(operatorStack.reverse());
-                    operatorStack = [];
-                    isOperPushReady = false;
-                  }
-                // *DEBUG* lines 58-62 solves case: 2+3*4-5 => 9
-                } else{
-                operatorStack.push(element); // this is an operator, push it to the operator stack
-                if (operatorStack.length !== 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]])){
-                    isOperPushReady = true;
-                }}
-
-                // *DEBUG* lines 65-69 solves for case: 8/4*2+3 => 7
-                // } else {
-                //     (operatorStack.length >= 1 && (precedence[element] >= precedence[operatorStack.slice(-1)[0]]))
-                //     operatorStack.push(element);
-                //     isOperPushReady = true;
-                // }
-            });
-
-        // keep track of equation parsing
-        valueStack = valueStack.concat(operatorStack);
-        console.log(valueStack);
-
-        var resultStack = [];
-
-        // evaluate polish notation
-        for (i=0; i<valueStack.length; i++){
-            if (typeof valueStack[i] === 'number'){
-                resultStack.push(valueStack[i]);
-            }else {
-                var num1 = resultStack.pop();
-                var num2 = resultStack.pop();
-                console.log(num1); // keep track of numbers being computed
-                console.log(num2); // keep track of numbers being computed
-                if (valueStack[i] === '+') {
-                    resultStack.push(num1 + num2);
-                } else if (valueStack[i] === '-'){
-                    resultStack.push(num2 - num1);
-                } else if (valueStack[i] === '*'){
-                    resultStack.push(num1 * num2);
-                } else if (valueStack[i] === '/') {
-                    resultStack.push(num2 / num1);
-                }
+        // var multipliedArr = [];
+        // multiply
+        console.log(equationArr);
+        for (i=0; i<equationArr.length; i++){
+            if (equationArr[i] === '*'){
+                equationArr[i] = equationArr[i-1] * equationArr[i+1]
+                result = equationArr[i];
+                indexResult = equationArr.indexOf(result);
+                equationArr.splice(indexResult -1, 3, result);
+                // console.log(equationArr);
+                multipliedArr = equationArr;
+                // console.log(multipliedArr);
+                return multipliedArr;
             }
         }
-
-        // daisy chain expressions after '=' is clicked. not optimized for pemdas, so only one expression. if another expression is passed through after the '=' is clicked, the resultStack will be > 1
-        if (resultStack.length > 1) {
-            var newOperator = valueStack.find(function(element){
-                if (typeof element !== 'number'){
-                    return element;
-                }      
-            });
-            var newResult = finalResult;
-            // *DEBUG* 'value' is evaluating to doulbe it's value
-                switch (newOperator){
-                    case '+':
-                        total = newResult + (value/2); // *HACK*
-                        break;
-                    case '-':
-                        total = newResult - (value/2) // *HACK*
-                        break;
-                    case '*':
-                        total = memory * value;
-                        break;
-                    case '/':
-                        total = newResult / value;
-                        break;
-                }
-                return total;
-
-        } else {
-            return resultStack.pop();
-            // console.log(resultStack.pop());
+        // divide
+        console.log(equationArr);
+        for (i=0; i<equationArr.length; i++){
+            if (equationArr[i] === '/'){
+                equationArr[i] = equationArr[i-1] / equationArr[i+1]
+                result = equationArr[i];
+                indexResult = equationArr.indexOf(result);
+                equationArr.splice(indexResult -1, 3, result);
+                // console.log(equationArr);
+                dividedArr = equationArr;
+                // console.log(dividedArr);
+                return dividedArr;
+            }
         }
+        // add
+        console.log(equationArr);
+        for (i=0; i<equationArr.length; i++){
+            if (equationArr[i] === '+'){
+                equationArr[i] = equationArr[i-1] + equationArr[i+1]
+                result = equationArr[i];
+                indexResult = equationArr.indexOf(result);
+                equationArr.splice(indexResult -1, 3, result);
+                // console.log(equationArr);
+                addedArr = equationArr;
+                // console.log(addedArr);
+                return addedArr;
+            }
+        }
+        // subtract
+        console.log(equationArr);
+        for (i=0; i<equationArr.length; i++){
+            if (equationArr[i] === '-'){
+                equationArr[i] = equationArr[i-1] - equationArr[i+1]
+                result = equationArr[i];
+                indexResult = equationArr.indexOf(result);
+                equationArr.splice(indexResult -1, 3, result);
+                // console.log(equationArr);
+                subtractedArr = equationArr;
+                // console.log(subtractedArr);
+                return subtractedArr;
+            }
+        }
+        console.log(equationArr);
     }
 
     function getFinalResult(x){
         finalResult = x;
         memory = finalResult;
-        console.log(finalResult); // keep track of final result
-        return finalResult;
+        console.log(equationArr); // keep track of final result
+        return equationArr;
     }
 
     // setters
 
     function setValue1(x) {
         value = x;
-        // value = Math.abs(x);
         return value;
     }
 
