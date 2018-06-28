@@ -12,7 +12,7 @@ var calculatorModule = (function(){
     // getters
     
     function getValue1() {
-        return value;
+        return Number.parseFloat(value).toFixed(2)
     }
 
     function getMemory() {
@@ -28,12 +28,12 @@ var calculatorModule = (function(){
     }
 
     function parseEquationArr() {
-        // var multipliedArr = [];
-        // multiply
-        console.log(equationArr);
+
+        //multiply
+        // console.log(equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '*'){
-                equationArr[i] = equationArr[i-1] * equationArr[i+1]
+                equationArr[i] = Number.parseFloat(equationArr[i-1]).toFixed(2) * Number.parseFloat(equationArr[i+1]).toFixed(2);
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
@@ -44,10 +44,10 @@ var calculatorModule = (function(){
             }
         }
         // divide
-        console.log(equationArr);
+        // console.log(equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '/'){
-                equationArr[i] = equationArr[i-1] / equationArr[i+1]
+                equationArr[i] = (Number.parseFloat(equationArr[i-1]).toFixed(2)) / (Number.parseFloat(equationArr[i+1]).toFixed(2));
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
@@ -58,24 +58,28 @@ var calculatorModule = (function(){
             }
         }
         // add
-        console.log(equationArr);
+        // console.log(typeof equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '+'){
-                equationArr[i] = equationArr[i-1] + equationArr[i+1]
+                var num1 = (Number.parseFloat(equationArr[i-1]))
+                var num2 = (Number.parseFloat(equationArr[i+1]))
+                equationArr[i] = num1 += num2;
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
                 // console.log(equationArr);
-                addedArr = equationArr;
-                // console.log(addedArr);
-                return addedArr;
+                subtractedArr = equationArr;
+                // console.log(subtractedArr);
+                return subtractedArr;
             }
         }
-        // subtract
         console.log(equationArr);
+
+        // subtract
+        // console.log(equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '-'){
-                equationArr[i] = equationArr[i-1] - equationArr[i+1]
+                equationArr[i] = (Number.parseFloat(equationArr[i-1]).toFixed(2)) - (Number.parseFloat(equationArr[i+1]).toFixed(2));
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
@@ -174,7 +178,11 @@ function loadValue1(){
     } else{
         display.innerHTML += oneBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof input);
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
     console.log(calculatorModule.getValue1());
 }
 
@@ -205,7 +213,12 @@ function loadValue2(){
     } else{
         display.innerHTML += twoBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -236,7 +249,12 @@ function loadValue3(){
     } else{
         display.innerHTML += threeBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -267,7 +285,12 @@ function loadValue4(){
     } else{
         display.innerHTML += fourBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -298,7 +321,12 @@ function loadValue5(){
     } else{
         display.innerHTML += fiveBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -329,7 +357,12 @@ function loadValue6(){
     } else{
         display.innerHTML += sixBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -360,7 +393,12 @@ function loadValue7(){
     } else{
         display.innerHTML += sevenBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -391,7 +429,12 @@ function loadValue8(){
     } else{
         display.innerHTML += eightBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -422,7 +465,12 @@ function loadValue9(){
     } else{
         display.innerHTML += nineBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof parseInt(input));
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -453,7 +501,12 @@ function loadValue0(){
     } else{
         display.innerHTML += zeroBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML));
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof input);
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
+    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -470,7 +523,11 @@ function loadValueDecm(){
     } else{
         display.innerHTML += decmBtnValue;
     }
-    calculatorModule.setValue1(parseInt(display.innerHTML)); //**NEED TO DEBUG FOR DECIMAL PLACES**//
+    var x = display.innerHTML;
+    console.log(x);
+    var input = parseInt(Number.parseFloat(x).toFixed(2));
+    console.log(typeof input);
+    calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
     console.log(calculatorModule.getValue1());
 }
 
