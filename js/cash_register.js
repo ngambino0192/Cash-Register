@@ -3,7 +3,7 @@
 
 var registerModule = (function(){
 
-    var cashBalance = 
+    var cashBalance = 1000;
 
     //getters
     
