@@ -29,8 +29,16 @@ var calculatorModule = (function(){
 
     function parseEquationArr() {
 
+        for (i=0; i<equationArr.length; i++){
+            if (equationArr[i] === 'NaN'){
+                result = equationArr[i];
+                indexResult = equationArr.indexOf(result);
+                equationArr.splice(indexResult, 1);
+                console.log(equationArr);
+                return equationArr;
+            }
+        }
         //multiply
-        // console.log(equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '*'){
                 equationArr[i] = Number.parseFloat(equationArr[i-1]).toFixed(2) * Number.parseFloat(equationArr[i+1]).toFixed(2);
@@ -44,7 +52,6 @@ var calculatorModule = (function(){
             }
         }
         // divide
-        // console.log(equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '/'){
                 equationArr[i] = (Number.parseFloat(equationArr[i-1]).toFixed(2)) / (Number.parseFloat(equationArr[i+1]).toFixed(2));
@@ -58,7 +65,6 @@ var calculatorModule = (function(){
             }
         }
         // add
-        // console.log(typeof equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '+'){
                 var num1 = (Number.parseFloat(equationArr[i-1]))
@@ -74,16 +80,13 @@ var calculatorModule = (function(){
         console.log(equationArr);
 
         // subtract
-        // console.log(equationArr);
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '-'){
                 equationArr[i] = (Number.parseFloat(equationArr[i-1]).toFixed(2)) - (Number.parseFloat(equationArr[i+1]).toFixed(2));
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
-                // console.log(equationArr);
                 subtractedArr = equationArr;
-                // console.log(subtractedArr);
                 return subtractedArr;
             }
         }
@@ -104,6 +107,10 @@ var calculatorModule = (function(){
         return value;
     }
 
+    function daisyChain() {
+        value = null;
+    }
+
     function setMemory(x) {
         memory = x;
     }
@@ -118,8 +125,7 @@ var calculatorModule = (function(){
             equationArr.push(num, op);
         }else{
             equationArr.push(num);
-        }
-        
+        }   
     }
 
     return {
@@ -132,7 +138,8 @@ var calculatorModule = (function(){
         setEquationArr: setEquationArr,
         getEquationArr: getEquationArr,
         parseEquationArr: parseEquationArr,
-        getFinalResult: getFinalResult
+        getFinalResult: getFinalResult,
+        daisyChain: daisyChain
     }
 
 }());
@@ -141,14 +148,10 @@ var calculatorModule = (function(){
 var display = document.getElementById('screen');
 display.innerHTML = 0;
 
-
-
 //** NUMBER EVENTS **//
-
 
 // target number buttons
 var targetNum = document.getElementsByClassName('num-btns');
-
 
 // append '1' into display and store in 'value'
 var oneBtn = targetNum[0];
@@ -183,7 +186,6 @@ function loadValue1(){
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
     console.log(calculatorModule.getValue1());
 }
-
 
 // append '2' into display and store in 'value 1'
 var twoBtn = targetNum[1];
@@ -220,7 +222,6 @@ function loadValue2(){
     console.log(calculatorModule.getValue1());
 }
 
-
 // append '3' into display and store in 'value 1'
 var threeBtn = targetNum[2];
 threeBtn.addEventListener('click', loadValue3);
@@ -239,7 +240,7 @@ function loadValue3(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = threeBtnValue;
     } else if(display.innerHTML === 'ON'){
-        display.innerHTML = threeBtnValue;
+        display.innerHTML = 'CLEAR SCREEN';
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
     } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
@@ -255,7 +256,6 @@ function loadValue3(){
     // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
-
 
 // append '4' into display and store in 'value 1'
 var fourBtn = targetNum[3];
@@ -275,7 +275,7 @@ function loadValue4(){
     } else if(display.innerHTML === '/'){
         display.innerHTML = fourBtnValue;
     } else if(display.innerHTML === 'ON'){
-        display.innerHTML = fourBtnValue;
+        display.innerHTML = 'CLEAR SCREEN';
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
     } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
@@ -291,7 +291,6 @@ function loadValue4(){
     // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
-
 
 // append '5' into display and store in 'value 1'
 var fiveBtn = targetNum[4];
@@ -328,7 +327,6 @@ function loadValue5(){
     console.log(calculatorModule.getValue1());
 }
 
-
 // append '6' into display and store in 'value 1'
 var sixBtn = targetNum[5];
 sixBtn.addEventListener('click', loadValue6);
@@ -363,7 +361,6 @@ function loadValue6(){
     // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
-
 
 // append '7' into display and store in 'value 1'
 var sevenBtn = targetNum[6];
@@ -400,7 +397,6 @@ function loadValue7(){
     console.log(calculatorModule.getValue1());
 }
 
-
 // append '8' into display and store in 'value 1'
 var eightBtn = targetNum[7];
 eightBtn.addEventListener('click', loadValue8);
@@ -435,7 +431,6 @@ function loadValue8(){
     // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
-
 
 // append '9' into display and store in 'value 1'
 var nineBtn = targetNum[8];
@@ -472,7 +467,6 @@ function loadValue9(){
     console.log(calculatorModule.getValue1());
 }
 
-
 // append '0' into display and store in 'value 1'
 var zeroBtn = targetNum[9];
 zeroBtn.addEventListener('click', loadValue0);
@@ -494,7 +488,7 @@ function loadValue0(){
         display.innerHTML = zeroBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance()){
         display.innerHTML = zeroBtnValue;
     } else{
         display.innerHTML += zeroBtnValue;
@@ -508,7 +502,6 @@ function loadValue0(){
     console.log(calculatorModule.getValue1());
 }
 
-
 // append '.' into display and store in 'value 1'
 var decmBtn = targetNum[10];
 decmBtn.addEventListener('click', loadValueDecm);
@@ -518,6 +511,8 @@ function loadValueDecm(){
 
     if (display.innerHTML === '0'){
         display.innerHTML += decmBtnValue;
+    } else if (display.innerHTML = 'OFF'){
+        display.innerHTML = display.innerHTML;
     } else{
         display.innerHTML += decmBtnValue;
     }
@@ -529,12 +524,10 @@ function loadValueDecm(){
     console.log(calculatorModule.getValue1());
 }
 
-
 //** OPERATOR EVENTS **//
 
-
+// target op-btns with DOM
 var opBtn = document.getElementsByClassName('op-btns');
-
 
 // add event for '+' operator
 var addBtn = opBtn[0];
@@ -550,7 +543,6 @@ function setAdd(){
     console.log(calculatorModule.getEquationArr());
 }
 
-
 // add event for '-' operator
 var subtBtn = opBtn[1];
 subtBtn.addEventListener('click', setSubt);
@@ -564,7 +556,6 @@ function setSubt(){
     calculatorModule.setEquationArr(calculatorModule.getValue1(), calculatorModule.getOperator());
     console.log(calculatorModule.getEquationArr());
 }
-
 
 // add event for '*' operator
 var multBtn = opBtn[2];
@@ -580,7 +571,6 @@ function setMult(){
     console.log(calculatorModule.getEquationArr());
 }
 
-
 // add event for '/' operator
 var divdBtn = opBtn[4];
 divdBtn.addEventListener('click', setDivd);
@@ -595,7 +585,6 @@ function setDivd(){
     console.log(calculatorModule.getEquationArr());
 }
 
-
 // add event for '=' operator
 var equalBtn = opBtn[3];
 equalBtn.addEventListener('click', evaluate);
@@ -609,73 +598,7 @@ function evaluate(){
     calculatorModule.parseEquationArr();
     console.log(calculatorModule.getFinalResult(calculatorModule.parseEquationArr()));
     display.innerHTML = calculatorModule.getFinalResult(calculatorModule.parseEquationArr());
+    calculatorModule.setMemory(calculatorModule.getFinalResult(calculatorModule.parseEquationArr()));
+    calculatorModule.daisyChain();
 
-}
-
-//** REGISTER FUNCTIONS **//
-
-var checkBalanceBtn = false;
-
-// target reg-btns with DOM
-var regBtn = document.getElementsByClassName('reg-btns');
-
-
-// add event to 'check balance' button
-var checkBlc = regBtn[0];
-checkBlc.addEventListener('click', checkBalance);
-
-function checkBalance(){
-    checkBalanceClick = true;
-    console.log('checkBalance');
-    display.innerHTML = localStorage.getItem('cashBalance.balance');
-};
-
-// add event to 'withdraw' button
-var withdrawBtn = regBtn[1];
-withdrawBtn.addEventListener('click', withdraw);
-
-function withdraw(){
-    console.log('withdraw');
-    display.innerHTML = 'MY PRECIOUS';
-    localStorage.setItem('cashBalance.balance', cashBalance.balance - parseInt(display.innerHTML));
-
-};
-
-// add event to 'deposit' button
-var depositBtn = regBtn[2];
-depositBtn.addEventListener('click', deposit);
-
-function deposit(){
-    console.log('deposit');
-    var storedAmount = localStorage.getItem('cashBalance.balance');
-    localStorage.setItem('cashBalance.balance', parseInt(storedAmount) + parseInt(display.innerHTML));
-
-};
-
-
-//** TOP BUTTONS **/
-
-
-// clear button
-var clearBtn = document.getElementById('clear-btn');
-clearBtn.addEventListener('click', clearScreen);
-
-function clearScreen(){
-    display.innerHTML = '0';
-    location.reload();
-    memory = 0;
-}
-
-var offBtn = document.getElementById('off-btn');
-offBtn.addEventListener('click', turnOff);
-
-function turnOff(){
-    display.innerHTML = 'OFF';
-}
-
-var onBtn = document.getElementById('on-btn');
-onBtn.addEventListener('click', turnOn);
-
-function turnOn(){
-    display.innerHTML = 'ON';
 }
