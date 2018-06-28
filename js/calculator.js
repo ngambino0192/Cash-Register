@@ -29,39 +29,37 @@ var calculatorModule = (function(){
 
     function parseEquationArr() {
 
+        // account for daisy chained equations
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === 'NaN'){
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult, 1);
-                console.log(equationArr);
                 return equationArr;
             }
         }
-        //multiply
+        // multiply
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '*'){
-                equationArr[i] = Number.parseFloat(equationArr[i-1]).toFixed(2) * Number.parseFloat(equationArr[i+1]).toFixed(2);
+                var num1 = Number.parseFloat(equationArr[i-1]).toFixed(2)
+                var num2 = Number.parseFloat(equationArr[i+1]).toFixed(2)
+                equationArr[i] = (num1 * num2).toFixed(2);
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
-                // console.log(equationArr);
-                multipliedArr = equationArr;
-                // console.log(multipliedArr);
-                return multipliedArr;
+                return equationArr;
             }
         }
         // divide
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '/'){
-                equationArr[i] = (Number.parseFloat(equationArr[i-1]).toFixed(2)) / (Number.parseFloat(equationArr[i+1]).toFixed(2));
+                var num1 = (Number.parseFloat(equationArr[i-1]).toFixed(2))
+                var num2 = (Number.parseFloat(equationArr[i+1]).toFixed(2))
+                equationArr[i] = (num1 / num2).toFixed(2);
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
-                // console.log(equationArr);
-                dividedArr = equationArr;
-                // console.log(dividedArr);
-                return dividedArr;
+                return equationArr;
             }
         }
         // add
@@ -73,8 +71,7 @@ var calculatorModule = (function(){
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
-                subtractedArr = equationArr;
-                return subtractedArr;
+                return equationArr;
             }
         }
         console.log(equationArr);
@@ -82,12 +79,13 @@ var calculatorModule = (function(){
         // subtract
         for (i=0; i<equationArr.length; i++){
             if (equationArr[i] === '-'){
-                equationArr[i] = (Number.parseFloat(equationArr[i-1]).toFixed(2)) - (Number.parseFloat(equationArr[i+1]).toFixed(2));
+                var num1 = (Number.parseFloat(equationArr[i-1]).toFixed(2))
+                var num2 = (Number.parseFloat(equationArr[i+1]).toFixed(2))
+                equationArr[i] = (num1 - num2).toFixed(2);
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
-                subtractedArr = equationArr;
-                return subtractedArr;
+                return equationArr;
             }
         }
         console.log(equationArr);
@@ -174,7 +172,7 @@ function loadValue1(){
         display.innerHTML = oneBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = oneBtnValue;
     } else{
         display.innerHTML += oneBtnValue;
@@ -208,7 +206,7 @@ function loadValue2(){
         display.innerHTML = twoBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = twoBtnValue;
     } else{
         display.innerHTML += twoBtnValue;
@@ -218,7 +216,6 @@ function loadValue2(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -243,7 +240,7 @@ function loadValue3(){
         display.innerHTML = 'CLEAR SCREEN';
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = threeBtnValue;
     } else{
         display.innerHTML += threeBtnValue;
@@ -253,7 +250,6 @@ function loadValue3(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -278,7 +274,7 @@ function loadValue4(){
         display.innerHTML = 'CLEAR SCREEN';
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = fourBtnValue;
     } else{
         display.innerHTML += fourBtnValue;
@@ -288,7 +284,6 @@ function loadValue4(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -313,7 +308,7 @@ function loadValue5(){
         display.innerHTML = fiveBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = fiveBtnValue;
     } else{
         display.innerHTML += fiveBtnValue;
@@ -323,7 +318,6 @@ function loadValue5(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -348,7 +342,7 @@ function loadValue6(){
         display.innerHTML = sixBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = sixBtnValue;
     } else{
         display.innerHTML += sixBtnValue;
@@ -358,7 +352,6 @@ function loadValue6(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -383,7 +376,7 @@ function loadValue7(){
         display.innerHTML = sevenBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = sevenBtnValue;
     } else{
         display.innerHTML += sevenBtnValue;
@@ -393,7 +386,6 @@ function loadValue7(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -418,7 +410,7 @@ function loadValue8(){
         display.innerHTML = eightBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = eightBtnValue;
     } else{
         display.innerHTML += eightBtnValue;
@@ -428,7 +420,6 @@ function loadValue8(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -453,7 +444,7 @@ function loadValue9(){
         display.innerHTML = nineBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === localStorage.getItem('cashBalance.balance')){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = nineBtnValue;
     } else{
         display.innerHTML += nineBtnValue;
@@ -463,7 +454,6 @@ function loadValue9(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof parseInt(input));
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -488,7 +478,7 @@ function loadValue0(){
         display.innerHTML = zeroBtnValue;
     } else if(display.innerHTML === 'OFF'){
         display.innerHTML = 'OFF';
-    } else if(display.innerHTML === registerModule.checkBalance()){
+    } else if(display.innerHTML === registerModule.checkBalance().toString()){
         display.innerHTML = zeroBtnValue;
     } else{
         display.innerHTML += zeroBtnValue;
@@ -498,7 +488,6 @@ function loadValue0(){
     var input = parseInt(Number.parseFloat(x).toFixed(2));
     console.log(typeof input);
     calculatorModule.setValue1(Number.parseFloat(x).toFixed(2));
-    // calculatorModule.setValue1(parseInt(display.innerHTML));
     console.log(calculatorModule.getValue1());
 }
 
@@ -511,8 +500,6 @@ function loadValueDecm(){
 
     if (display.innerHTML === '0'){
         display.innerHTML += decmBtnValue;
-    } else if (display.innerHTML = 'OFF'){
-        display.innerHTML = display.innerHTML;
     } else{
         display.innerHTML += decmBtnValue;
     }

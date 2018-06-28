@@ -12,7 +12,11 @@ var registerModule = (function(){
     }
 
     function withdraw(x) {
+        if (x > cashBalance){
+            display.innerHTML = 'deposit more funds'
+        }else{
         cashBalance = cashBalance - x;
+        }
     }
 
     //setters
@@ -52,7 +56,6 @@ withdrawBtn.addEventListener('click', withdraw);
 
 function withdraw(){
     console.log('withdraw');
-    // display.innerHTML = 'MY PRECIOUS';
     registerModule.withdraw(calculatorModule.getValue1());
 
 };
