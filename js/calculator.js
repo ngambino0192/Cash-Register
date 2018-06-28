@@ -63,13 +63,11 @@ var calculatorModule = (function(){
             if (equationArr[i] === '+'){
                 var num1 = (Number.parseFloat(equationArr[i-1]))
                 var num2 = (Number.parseFloat(equationArr[i+1]))
-                equationArr[i] = num1 += num2;
+                equationArr[i] = (num1 += num2).toFixed(2);
                 result = equationArr[i];
                 indexResult = equationArr.indexOf(result);
                 equationArr.splice(indexResult -1, 3, result);
-                // console.log(equationArr);
                 subtractedArr = equationArr;
-                // console.log(subtractedArr);
                 return subtractedArr;
             }
         }
