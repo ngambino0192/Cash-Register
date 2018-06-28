@@ -2,15 +2,13 @@ Bug List:
 
 * balance amount does not persist past refresh
 
-* .00 does not always show up
+* .00 does not always show up (cashBalance)
 
-* cannot input negative numbers
+* cannot input negative numbers, other than initial number
 
 * condense event listeners for buttons. turn all event listeners for buttons into a single class
 
 * tweak css for responsiveness
 
 * establish a max screen size
-
-* ,000 separator
 
